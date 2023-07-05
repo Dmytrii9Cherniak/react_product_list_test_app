@@ -107,6 +107,17 @@
       },
       "weight": 1,
       "comments": []
+    },
+    {
+      "imageUrl": "https://idom.kiev.ua/image/iPad/iPad-Pro-M2-2022/iPad-Pro-M2-2022-12-9-silver-photo.jpg",
+      "name": "Ipad Pro",
+      "count": "23",
+      "size": {
+        "width": "150",
+        "height": "150"
+      },
+      "weight": "150",
+      "id": 10
     }
   ]
 }

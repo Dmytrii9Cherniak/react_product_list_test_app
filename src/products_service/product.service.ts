@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { ProductActionModel } from '../models/product.action.model';
 import { Action_types } from '../redux/action_types';
 import { environment } from '../environments/environment';
-import {ProductModel} from "../models/product.model";
+import { NewProductModel } from '../models/new.product.model';
 
 export const getAllProducts = () => {
     return async (dispatch: Dispatch<ProductActionModel>) => {
@@ -28,13 +28,7 @@ export const deleteProduct = (id: number) => {
     };
 };
 
-export const createProduct = (body: {
-    size: { width: string; height: string };
-    imageUrl: string;
-    name: string;
-    count: string;
-    weight: string
-}) => {
+export const createProduct = (body: NewProductModel) => {
     return async (dispatch: Dispatch<ProductActionModel>) => {
         try {
             dispatch({ type: Action_types.CREATE_NEW_PRODUCT });

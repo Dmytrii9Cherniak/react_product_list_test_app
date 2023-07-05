@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { ModalWindowProps } from '../../models/modal.window.model';
-import '../CreateProductModal/CreateProductModal.scss';
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../../redux/all_reducers';
 import { ProductActionModel } from '../../models/product.action.model';
 import { useDispatch } from 'react-redux';
 import { createProduct } from '../../products_service/product.service';
+import '../CreateProductModal/CreateProductModal.scss';
 
 function CreateProductModal({ active, setActive }: ModalWindowProps): JSX.Element {
 
@@ -35,7 +35,8 @@ function CreateProductModal({ active, setActive }: ModalWindowProps): JSX.Elemen
             },
             weight: inputValues.weight,
         };
-        dispatch(createProduct(newProduct))
+        dispatch(createProduct(newProduct));
+        setActive(false);
     };
 
     const isAnyInputEmpty: boolean = Object.values(inputValues).some((value) => value === '');
