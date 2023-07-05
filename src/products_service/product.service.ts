@@ -14,3 +14,15 @@ export const getAllProducts = () => {
         }
     };
 };
+
+export const deleteProduct = (id: number) => {
+    return async (dispatch: Dispatch<ProductActionModel>) => {
+        try {
+            dispatch({ type: Action_types.DELETE_PRODUCT });
+            await fetch(`${environment.apiUrl}/products/${id}`, { method: 'DELETE' });
+            dispatch({ type: Action_types.DELETE_PRODUCT_SUCCESS, payload: id });
+        } catch (e) {
+            dispatch({ type: Action_types.DELETE_PRODUCT_ERROR, payload: 'Something went wrong' });
+        }
+    };
+};
