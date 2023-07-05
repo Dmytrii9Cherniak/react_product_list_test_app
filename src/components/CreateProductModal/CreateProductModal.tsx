@@ -19,12 +19,12 @@ function CreateProductModal({ active, setActive }: ModalWindowProps): JSX.Elemen
         weight: '',
     });
 
-    const inputOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputOnChange = (event: React.ChangeEvent<HTMLInputElement>) :void => {
         const { name, value } = event.target;
         setInputValues({ ...inputValues, [name]: value });
     };
 
-    const addNewProduct = () => {
+    const addNewProduct = () :void => {
         const newProduct = {
             imageUrl: inputValues.imageUrl,
             name: inputValues.name,
@@ -39,7 +39,7 @@ function CreateProductModal({ active, setActive }: ModalWindowProps): JSX.Elemen
         setActive(false);
     };
 
-    const isAnyInputEmpty: boolean = Object.values(inputValues).some((value) => value === '');
+    const isAnyInputEmpty: boolean = Object.values(inputValues).some((value: string) :boolean => value === '');
 
     return (
         <div className={active ? 'createModalWindow active' : 'createModalWindow'}>

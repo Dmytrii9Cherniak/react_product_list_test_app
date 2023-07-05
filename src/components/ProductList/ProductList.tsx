@@ -18,24 +18,24 @@ function ProductList(): JSX.Element {
     const dispatch: ThunkDispatch<RootState, void, ProductActionModel> = useDispatch();
     const [sortType, setSortType] = useState('name');
 
-    useEffect(() => {
+    useEffect(() :void => {
         dispatch(getAllProducts());
     }, [dispatch]);
 
-    useEffect(() => {
+    useEffect(() :void => {
         sessionStorage.setItem('sortType', sortType);
     }, [sortType]);
 
-    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) :void => {
         setSortType(event.target.value);
     };
 
-    const handleDeleteProduct = (id: number) => {
+    const handleDeleteProduct = (id: number) :void => {
         setModalActive(true);
         setSelectedProductId(id);
     };
 
-    const handleConfirmDelete = () => {
+    const handleConfirmDelete = () :void => {
         if (selectedProductId) {
             dispatch(deleteProduct(selectedProductId));
             setModalActive(false);
