@@ -9,7 +9,7 @@ const initialState: ProductStateModel = {
     error: null
 }
 
-export const ProductReducer =(state = initialState, action: ProductActionModel) => {
+export const ProductReducer =(state: ProductStateModel = initialState, action: ProductActionModel) => {
 
     switch (action.type) {
 
