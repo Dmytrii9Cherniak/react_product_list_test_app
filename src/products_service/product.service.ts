@@ -39,10 +39,10 @@ export const createProduct = (body: NewProductModel) => {
                     'Content-Type': 'application/json',
                 },
             });
-            const newProduct = await response.json(); // Отримання нового продукту з відповіді сервера
+            const newProduct = await response.json();
             dispatch({
                 type: Action_types.CREATE_NEW_PRODUCT_SUCCESS,
-                payload: newProduct, // Використання отриманого нового продукту як payload
+                payload: newProduct,
             });
         } catch (e) {
             dispatch({
