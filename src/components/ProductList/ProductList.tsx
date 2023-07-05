@@ -7,8 +7,10 @@ import { ThunkDispatch } from 'redux-thunk';
 import { useTypesSelector } from '../../hooks/useTypedSelector';
 import { ProductModel } from '../../models/product.model';
 import './ProductsList.scss';
+import ModalWindow from "../ModalWindow/ModalWindow";
 
 function ProductList(): JSX.Element {
+    const [modalActive, setModalActive] = useState(false);
     const { products, error, loading } = useTypesSelector(state => state.products);
     const dispatch: ThunkDispatch<RootState, void, ProductActionModel> = useDispatch();
     const [sortType, setSortType] = useState('name');
@@ -65,10 +67,12 @@ function ProductList(): JSX.Element {
                         <img src={el.imageUrl} alt="image" />
                         <article>
                             <h4>{el.name}</h4>
+                            <button onClick={() => setModalActive(true)}> Delete product </button>
                         </article>
                     </div>
                 ))}
             </div>
+            <ModalWindow active={modalActive} setActive={setModalActive}/>
         </div>
     );
 }
