@@ -41,11 +41,16 @@ function ProductList(): JSX.Element {
     return (
         <div className="listOfProducts">
             <header className="header">
-                <select className="sortSelect" value={sortType} onChange={handleSortChange}>
-                    <option value="name">Sort by Name</option>
-                    <option value="count">Sort by Count</option>
-                    <option value="weight">Sort by Weight</option>
-                </select>
+                <div>
+                    <button className="button">
+                        Add product
+                    </button>
+                    <select className="sortSelect" value={sortType} onChange={handleSortChange}>
+                        <option value="name">Sort by Name</option>
+                        <option value="count">Sort by Count</option>
+                        <option value="weight">Sort by Weight</option>
+                    </select>
+                </div>
             </header>
             <div className="productList">
                 {error && !loading && <div className="errorLoadingOrNoProductsFound">{error}</div>}
