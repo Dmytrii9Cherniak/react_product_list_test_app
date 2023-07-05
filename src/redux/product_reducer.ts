@@ -25,7 +25,11 @@ export const ProductReducer =(state: ProductStateModel = initialState, action: P
         case Action_types.CREATE_NEW_PRODUCT_ERROR:
             return { loading: false, error: action.payload, products: [...state.products] };
         case Action_types.CREATE_NEW_PRODUCT_SUCCESS:
-            return { ...state, loading: false, products: [...state.products, action.payload] };
+            return {
+                ...state,
+                loading: false,
+                products: [...state.products, action.payload],
+            };
 
         case Action_types.DELETE_PRODUCT:
             return { ...state, loading: true };

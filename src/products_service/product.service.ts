@@ -28,20 +28,27 @@ export const deleteProduct = (id: number) => {
     };
 };
 
-export const createProduct = (body: ProductModel) => {
+export const createProduct = (body: {
+    size: { width: string; height: string };
+    imageUrl: string;
+    name: string;
+    count: string;
+    weight: string
+}) => {
     return async (dispatch: Dispatch<ProductActionModel>) => {
         try {
             dispatch({ type: Action_types.CREATE_NEW_PRODUCT });
-            await fetch(`${environment.apiUrl}/products`, {
+            const response = await fetch(`${environment.apiUrl}/products`, {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
+            const newProduct = await response.json(); // Отримання нового продукту з відповіді сервера
             dispatch({
                 type: Action_types.CREATE_NEW_PRODUCT_SUCCESS,
-                payload: 'Product successfully created',
+                payload: newProduct, // Використання отриманого нового продукту як payload
             });
         } catch (e) {
             dispatch({

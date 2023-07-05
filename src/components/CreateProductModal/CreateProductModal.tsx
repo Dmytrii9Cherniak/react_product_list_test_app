@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { ModalWindowProps } from '../../models/modal.window.model';
 import '../CreateProductModal/CreateProductModal.scss';
+import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from '../../redux/all_reducers';
+import { ProductActionModel } from '../../models/product.action.model';
+import { useDispatch } from 'react-redux';
+import { createProduct } from '../../products_service/product.service';
 
 function CreateProductModal({ active, setActive }: ModalWindowProps): JSX.Element {
+
+    const dispatch: ThunkDispatch<RootState, void, ProductActionModel> = useDispatch();
     const [inputValues, setInputValues] = useState({
         imageUrl: '',
         name: '',
@@ -28,10 +35,10 @@ function CreateProductModal({ active, setActive }: ModalWindowProps): JSX.Elemen
             },
             weight: inputValues.weight,
         };
-        console.log(newProduct);
+        dispatch(createProduct(newProduct))
     };
 
-    const isAnyInputEmpty = Object.values(inputValues).some((value) => value === '');
+    const isAnyInputEmpty: boolean = Object.values(inputValues).some((value) => value === '');
 
     return (
         <div className={active ? 'createModalWindow active' : 'createModalWindow'}>
