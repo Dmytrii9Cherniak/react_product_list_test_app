@@ -1,0 +1,36 @@
+.listOfProducts {
+
+    .header {
+        height: 75px;
+        background-color: gray;
+    }
+
+    .productList {
+        margin-top: 10px;
+        min-height: calc(100vh - 75px);
+        height: auto;
+        display: flex;
+        column-gap: 25px;
+        margin-left: 60px;
+        row-gap: 12px;
+        flex-wrap: wrap;
+
+        .productItem {
+            border: 1px solid black;
+            width: 250px;
+            height: 350px;
+
+            img {
+                width: 100%;
+                height: 65%;
+            };
+
+            article {
+                display: flex;
+                justify-content: center;
+            }
+
+        }
+    }
+
+}
