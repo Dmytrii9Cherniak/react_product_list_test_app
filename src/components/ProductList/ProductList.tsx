@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getAllProducts } from '../../products_service/product.service';
+import { getAllProducts, deleteProduct } from '../../products_service/product.service';
 import { RootState } from '../../redux/all_reducers';
 import { ProductActionModel } from '../../models/product.action.model';
 import { ThunkDispatch } from 'redux-thunk';
@@ -11,6 +11,7 @@ import ModalWindow from "../ModalWindow/ModalWindow";
 
 function ProductList(): JSX.Element {
     const [modalActive, setModalActive] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
     const { products, error, loading } = useTypesSelector(state => state.products);
     const dispatch: ThunkDispatch<RootState, void, ProductActionModel> = useDispatch();
     const [sortType, setSortType] = useState('name');
@@ -25,6 +26,18 @@ function ProductList(): JSX.Element {
 
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortType(event.target.value);
+    };
+
+    const handleDeleteProduct = (id: number) => {
+        setModalActive(true);
+        setSelectedProductId(id);
+    };
+
+    const handleConfirmDelete = () => {
+        if (selectedProductId) {
+            dispatch(deleteProduct(selectedProductId));
+            setModalActive(false);
+        }
     };
 
     const sortedProducts = [...products].sort((a, b) => {
@@ -67,12 +80,12 @@ function ProductList(): JSX.Element {
                         <img src={el.imageUrl} alt="image" />
                         <article>
                             <h4>{el.name}</h4>
-                            <button onClick={() => setModalActive(true)}> Delete product </button>
+                            <button onClick={() => handleDeleteProduct(el.id)}> Delete product </button>
                         </article>
                     </div>
                 ))}
             </div>
-            <ModalWindow active={modalActive} setActive={setModalActive}/>
+            <ModalWindow active={modalActive} setActive={setModalActive} handleConfirm={handleConfirmDelete} />
         </div>
     );
 }
