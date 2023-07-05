@@ -7,7 +7,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { useTypesSelector } from '../../hooks/useTypedSelector';
 import { ProductModel } from '../../models/product.model';
 import './ProductsList.scss';
-import ModalWindow from "../ModalWindow/ModalWindow";
+import ConfirmModalWindow from "../ModalWindow/ConfirmModalWindow";
 
 function ProductList(): JSX.Element {
     const [modalActive, setModalActive] = useState(false);
@@ -85,7 +85,7 @@ function ProductList(): JSX.Element {
                     </div>
                 ))}
             </div>
-            <ModalWindow active={modalActive} setActive={setModalActive} handleConfirm={handleConfirmDelete} />
+            <ConfirmModalWindow active={modalActive} setActive={setModalActive} handleConfirm={handleConfirmDelete} />
         </div>
     );
 }

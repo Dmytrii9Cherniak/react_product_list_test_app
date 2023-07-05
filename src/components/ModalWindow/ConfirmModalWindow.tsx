@@ -1,8 +1,8 @@
 import React from 'react';
 import { ModalWindowProps } from '../../models/modal.window.model';
-import '../ModalWindow/ModalWindow.scss';
+import './ConfirmModalWindow.scss';
 
-function ModalWindow({ active, setActive, handleConfirm }: ModalWindowProps): JSX.Element {
+function ConfirmModalWindow({ active, setActive, handleConfirm }: ModalWindowProps): JSX.Element {
 
     return (
         <div className={active ? 'modalWindow active' : 'modalWindow'}>
@@ -17,4 +17,4 @@ function ModalWindow({ active, setActive, handleConfirm }: ModalWindowProps): JS
     );
 }
 
-export default ModalWindow;
+export default ConfirmModalWindow;
