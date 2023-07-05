@@ -8,9 +8,11 @@ import { useTypesSelector } from '../../hooks/useTypedSelector';
 import { ProductModel } from '../../models/product.model';
 import './ProductsList.scss';
 import ConfirmModalWindow from "../ModalWindow/ConfirmModalWindow";
+import CreateProductModal from "../CreateProductModal/CreateProductModal";
 
 function ProductList(): JSX.Element {
     const [modalActive, setModalActive] = useState(false);
+    const [createProductModalActive, setCreateProductModalActive] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
     const { products, error, loading } = useTypesSelector(state => state.products);
     const dispatch: ThunkDispatch<RootState, void, ProductActionModel> = useDispatch();
@@ -57,7 +59,7 @@ function ProductList(): JSX.Element {
         <div className="listOfProducts">
             <header className="header">
                 <div>
-                    <button className="button">
+                    <button className="button" onClick={() => setCreateProductModalActive(true)}>
                         Add product
                     </button>
                     <select className="sortSelect" value={sortType} onChange={handleSortChange}>
@@ -86,6 +88,7 @@ function ProductList(): JSX.Element {
                 ))}
             </div>
             <ConfirmModalWindow active={modalActive} setActive={setModalActive} handleConfirm={handleConfirmDelete} />
+            <CreateProductModal active={createProductModalActive} setActive={setCreateProductModalActive} />
         </div>
     );
 }
