@@ -9,20 +9,19 @@ import { ProductModel } from '../../models/product.model';
 import './ProductsList.scss';
 
 function ProductList(): JSX.Element {
-
     const { products, error, loading } = useTypesSelector(state => state.products);
     const dispatch: ThunkDispatch<RootState, void, ProductActionModel> = useDispatch();
-    const [sortType, setSortType] = useState('name'); // Початкове значення сортування за іменем
+    const [sortType, setSortType] = useState('name');
 
-    useEffect((): void => {
+    useEffect(() => {
         dispatch(getAllProducts());
     }, [dispatch]);
 
-    useEffect((): void => {
+    useEffect(() => {
         sessionStorage.setItem('sortType', sortType);
     }, [sortType]);
 
-    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) :void => {
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortType(event.target.value);
     };
 
@@ -50,11 +49,17 @@ function ProductList(): JSX.Element {
             </header>
             <div className="productList">
                 {error && !loading && <div className="errorLoadingOrNoProductsFound">{error}</div>}
-                {sortedProducts.map((el: ProductModel) => (
+                {!error && !loading && sortedProducts.length === 0 && (
+                    <div className="errorLoadingOrNoProductsFound">No products found</div>
+                )}
+                {loading && sortedProducts.length <= 0 && !error && (
+                    <div className="errorLoadingOrNoProductsFound">Loading...</div>
+                )}
+                {!error && !loading && sortedProducts.length > 0 && sortedProducts.map((el: ProductModel) => (
                     <div key={el.id} className="productItem">
                         <img src={el.imageUrl} alt="image" />
                         <article>
-                            <p>{el.name}</p>
+                            <h4>{el.name}</h4>
                         </article>
                     </div>
                 ))}
