@@ -52,7 +52,7 @@ function CreateProductModal({ active, setActive }: ModalWindowProps): JSX.Elemen
                     <div>
                         <label>
                             <h4> Add product image url </h4>
-                            <input type="text" onChange={inputOnChange} name="imageUrl" />
+                            <input type="text" onChange={inputOnChange} value={inputValues.imageUrl} name="imageUrl" />
                         </label>
                         <label>
                             <h4> Add product name </h4>
